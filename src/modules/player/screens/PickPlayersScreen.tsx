@@ -2,6 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { ArrowRight2 } from "iconsax-react";
 import { toast } from "sonner";
 import { Page } from "@/components/page";
+import { startTransition } from "@/components/transition";
 import { Button } from "@/components/ui/button";
 import { DraftTeamSummary } from "../components/DraftTeamSummary";
 import { PlayersTable } from "../components/PlayersTable";
@@ -17,7 +18,9 @@ export const PickPlayersScreen = () => {
 			toast.error("Make a Team of 11 players to proceed");
 			return;
 		}
-		navigate({ to: "/pick/captains" });
+		startTransition(() => {
+			navigate({ to: "/pick/captains" });
+		});
 	};
 
 	return (
@@ -26,7 +29,7 @@ export const PickPlayersScreen = () => {
 				<Page.GoBack to="/matches" search={{ sport: "" }} text="Contest" />
 			</Page.Header>
 
-			<div className="mb-16">
+			<Page.Content>
 				<div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 p-2">
 					<TeamVersusCard />
 
@@ -34,10 +37,10 @@ export const PickPlayersScreen = () => {
 				</div>
 
 				<div>
-					<h2 className="text-2xl mb-4">Choose Team</h2>
+					<Page.Title>Choose Team</Page.Title>
 					<PlayersTable />
 				</div>
-			</div>
+			</Page.Content>
 
 			<Page.Footer>
 				<Button size="lg" onClick={handleTeamSave}>

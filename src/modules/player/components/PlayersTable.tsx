@@ -7,6 +7,7 @@ import {
 import { type HTMLProps, use, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { DataTable } from "@/components/DataTable";
+import { IndeterminateCheckbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import type { Player } from "../api";
 import { PLAYERS } from "../api";
@@ -127,27 +128,4 @@ export function PlayersTable() {
 	}, [rowSelection]);
 
 	return <DataTable table={table} />;
-}
-
-function IndeterminateCheckbox({
-	indeterminate,
-	className = "",
-	...rest
-}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-	const ref = useRef<HTMLInputElement>(null);
-
-	useEffect(() => {
-		if (typeof indeterminate === "boolean" && ref.current) {
-			ref.current.indeterminate = !rest.checked && indeterminate;
-		}
-	}, [indeterminate, rest.checked]);
-
-	return (
-		<input
-			type="checkbox"
-			ref={ref}
-			className={cn("cursor-pointer", className)}
-			{...rest}
-		/>
-	);
 }

@@ -10,7 +10,7 @@ import "./styles.css";
 
 const TanStackQueryProviderContext = TanStackQueryProvider.getContext();
 const router = createRouter({
-	//defaultViewTransition: true,
+	defaultViewTransition: true,
 	routeTree,
 	context: {
 		...TanStackQueryProviderContext,

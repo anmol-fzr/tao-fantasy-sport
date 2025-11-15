@@ -14,10 +14,12 @@ export const TeamVersusCard = () => {
 	const { t1_image, t1_name, t2_image, t2_name } = match;
 
 	return (
-		<TeamVersusCardImpl
-			team1={{ image: t1_image, name: t1_name }}
-			team2={{ image: t2_image, name: t2_name }}
-		/>
+		<ViewTransition name={t1_image + t2_image}>
+			<TeamVersusCardImpl
+				team1={{ image: t1_image, name: t1_name }}
+				team2={{ image: t2_image, name: t2_name }}
+			/>
+		</ViewTransition>
 	);
 };
 
@@ -44,7 +46,7 @@ const TeamVersusCardImpl = (props: TeamVersusCardImplProps) => {
 TeamVersusCardImpl.Image = (props: TeamDetails) => {
 	const { image, name } = props;
 	return (
-		<div className="bg-white p-1 rounded-full aspect-square">
+		<div className="bg-background/50 border p-3 rounded-full aspect-square">
 			<ViewTransition name={`match-image-${name}`}>
 				<MatchListItem.Image className="size-16" src={image} alt={name} />
 			</ViewTransition>

@@ -77,7 +77,10 @@ export const useDraftStore = create<DraftState>()(
 			setViceCaptain: (id) => set({ viceCaptainId: id }),
 
 			reset: () => {
+				console.log("reset draft store");
+
 				set({
+					matchId: 0,
 					players: [],
 					captainId: null,
 					viceCaptainId: null,

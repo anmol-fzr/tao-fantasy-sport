@@ -1,4 +1,24 @@
-import type { Player, PlayerRole } from "@/modules/player/api";
+import type { Player, PlayerRole, ShortPlayerRole } from "@/modules/player/api";
+
+export function fullToShortPlayerRole(role: PlayerRole) {
+	const trans: Record<PlayerRole, ShortPlayerRole> = {
+		"Wicket-Keeper": "WK",
+		"All-Rounder": "AR",
+		Batsman: "BAT",
+		Bowler: "BOWL",
+	};
+	return trans[role];
+}
+
+export function shortToFullPlayerRole(role: ShortPlayerRole) {
+	const trans: Record<ShortPlayerRole, PlayerRole> = {
+		WK: "Wicket-Keeper",
+		AR: "All-Rounder",
+		BAT: "Batsman",
+		BOWL: "Bowler",
+	};
+	return trans[role];
+}
 
 export function getRoleCounts(players: Player[]) {
 	const counts: Record<PlayerRole, number> = {

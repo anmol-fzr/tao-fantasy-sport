@@ -3,6 +3,7 @@ import {
 	Table,
 	TableBody,
 	TableCell,
+	TableFooter,
 	TableHead,
 	TableHeader,
 	TableRow,
@@ -46,6 +47,21 @@ export function DataTable<TData>({ table, className }: DataTableProps<TData>) {
 						</TableRow>
 					))}
 				</TableBody>
+
+				<TableFooter>
+					{table.getFooterGroups().map((footerGroup) => (
+						<TableRow key={footerGroup.id}>
+							{footerGroup.headers.map((footer) => (
+								<TableHead key={footer.id}>
+									{flexRender(
+										footer.column.columnDef.header,
+										footer.getContext(),
+									)}
+								</TableHead>
+							))}
+						</TableRow>
+					))}
+				</TableFooter>
 			</Table>
 		</div>
 	);

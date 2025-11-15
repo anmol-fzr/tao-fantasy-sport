@@ -2,8 +2,10 @@ import { axiosInst } from "@/lib/axios";
 
 export type Players = Player[];
 const roles = ["Bowler", "All-Rounder", "Batsman", "Wicket-Keeper"] as const;
+const shortRoles = ["BOWL", "AR", "BAT", "WK"] as const;
 
 export type PlayerRole = (typeof roles)[number];
+export type ShortPlayerRole = (typeof shortRoles)[number];
 
 export interface Player {
 	id: number;

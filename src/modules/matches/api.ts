@@ -40,7 +40,9 @@ export interface MatchDetails {
 export const MATCHES = {
 	ALL: () => matches,
 	ONE: (id: MatchDetails["id"]) => {
-		for (const [_sport, sportMatches] of Object.entries(matches.matches)) {
+		const allMatches = MATCHES.ALL();
+
+		for (const [_sport, sportMatches] of Object.entries(allMatches.matches)) {
 			for (const sportMatch of sportMatches) {
 				if (sportMatch.id === id) {
 					return sportMatch;

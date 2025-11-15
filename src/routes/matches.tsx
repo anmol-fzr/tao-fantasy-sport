@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Page } from "@/components/page";
 import { MATCHES } from "@/modules/matches/api";
 import { MatchListItem } from "@/modules/matches/components/MatchList";
 import { SportsList } from "@/modules/matches/components/SportsList";
@@ -19,13 +20,13 @@ function RouteComponent() {
 	const match = matches[sport as keyof typeof matches];
 
 	return (
-		<div className="space-y-6">
-			<SportsList />
+		<Page>
+			<Page.Header>
+				<SportsList />
+			</Page.Header>
 
-			<div className="space-y-6">
-				<h2 className="text-2xl font-semibold capitalize">
-					Upcoming Matches {sport ? `for ${sport}` : ``}
-				</h2>
+			<Page.Content className="mt-6">
+				<Page.Title>Upcoming Matches {sport ? `for ${sport}` : ``}</Page.Title>
 				<div className="flex flex-col gap-4">
 					{sport?.length > 0
 						? match.map((match) => (
@@ -44,7 +45,7 @@ function RouteComponent() {
 								</div>
 							))}
 				</div>
-			</div>
-		</div>
+			</Page.Content>
+		</Page>
 	);
 }

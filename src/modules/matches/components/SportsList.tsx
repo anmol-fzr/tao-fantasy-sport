@@ -1,5 +1,6 @@
 import { Link, useSearch } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { Page } from "@/components/page";
 import { MATCHES } from "../api";
 
 export const SportsList = () => {
@@ -22,7 +23,7 @@ interface SportsListImplProps {
 const SportsListImpl = ({ matches, selectedSport }: SportsListImplProps) => {
 	return (
 		<div className="space-y-2">
-			<h2 className="text-3xl font-semibold">Contest</h2>
+			<Page.Title>Contest</Page.Title>
 			<div className="flex gap-4">
 				<SportLink sport="" isSelected={!selectedSport}>
 					All

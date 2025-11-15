@@ -67,21 +67,19 @@ export const MatchListItem = (props: MatchListItemProps) => {
 		<ViewTransition name={`match-${id}`}>
 			<div className="p-4 rounded-xl border flex flex-col gap-4">
 				<div className="flex w-full justify-between items-center">
-					<span className="flex items-center gap-2">
-						<ViewTransition name={`match-image-${t1_image}`}>
-							<MatchListItem.Image src={t1_image} alt={t1_name} />
-						</ViewTransition>
-						<p className="sm:hidden">{t1_short_name}</p>
-						<p className="hidden sm:block">{t1_name}</p>
-					</span>
+					<MatchListItem.Team
+						shortName={t1_short_name}
+						name={t1_name}
+						image={t1_image}
+					/>
+
 					<p className="text-muted-foreground">VS</p>
-					<span className="flex items-center gap-2">
-						<p className="sm:hidden">{t2_short_name}</p>
-						<p className="hidden sm:block">{t2_name}</p>
-						<ViewTransition name={`match-image-${t2_image}`}>
-							<MatchListItem.Image src={t2_image} alt={t2_name} />
-						</ViewTransition>
-					</span>
+
+					<MatchListItem.Team
+						shortName={t2_short_name}
+						name={t2_name}
+						image={t2_image}
+					/>
 				</div>
 				<div className="flex w-full justify-between items-center">
 					<p className="text-muted-foreground inline-flex gap-2 justify-end">
@@ -106,6 +104,25 @@ export const MatchListItem = (props: MatchListItemProps) => {
 				</Button>
 			</div>
 		</ViewTransition>
+	);
+};
+
+interface MatchListItemTeamProps {
+	shortName: string;
+	name: string;
+	image: string;
+}
+
+MatchListItem.Team = (props: MatchListItemTeamProps) => {
+	const { shortName, name, image } = props;
+	return (
+		<span className="flex items-center gap-2">
+			<ViewTransition name={`match-image-${image}`}>
+				<MatchListItem.Image src={image} alt={name} />
+			</ViewTransition>
+			<p className="sm:hidden">{shortName}</p>
+			<p className="hidden sm:block">{name}</p>
+		</span>
 	);
 };
 

@@ -1,16 +1,18 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { MatchDetails } from "@/modules/matches/api";
 import type { Player, Players } from "@/modules/player/api";
 
 type PlayerId = Player["id"];
 
 interface Team {
+	matchId: MatchDetails["id"];
 	players: Players;
 	captainId: PlayerId;
 	viceCaptainId: PlayerId;
 }
 
-type TeamWithId = Team & {
+export type TeamWithId = Team & {
 	id: number;
 };
 

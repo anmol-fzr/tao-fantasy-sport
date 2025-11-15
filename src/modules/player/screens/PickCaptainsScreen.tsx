@@ -10,14 +10,13 @@ import { useDraftStore } from "../store";
 
 const { addTeam } = useTeamStore.getState();
 const { reset } = useDraftStore.getState();
-export function PickCaptainsScreen() {
-	const players = useDraftStore((state) => state.players);
-	const captainId = useDraftStore((state) => state.captainId);
-	const viceCaptainId = useDraftStore((state) => state.viceCaptainId);
 
+export function PickCaptainsScreen() {
 	const navigate = useNavigate();
 
 	const handleTeamSave = () => {
+		const { captainId, viceCaptainId } = useDraftStore.getState();
+
 		if (!captainId) {
 			toast.error("Select a Captain to Proceed");
 			return;
@@ -27,7 +26,10 @@ export function PickCaptainsScreen() {
 			return;
 		}
 
+		const { matchId, players } = useDraftStore.getState();
+
 		addTeam({
+			matchId,
 			players,
 			captainId,
 			viceCaptainId,

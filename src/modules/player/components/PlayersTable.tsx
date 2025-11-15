@@ -4,11 +4,10 @@ import {
 	type RowSelectionState,
 	useReactTable,
 } from "@tanstack/react-table";
-import { type HTMLProps, use, useEffect, useRef, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DataTable } from "@/components/DataTable";
 import { IndeterminateCheckbox } from "@/components/ui/checkbox";
-import { cn } from "@/lib/utils";
 import type { Player } from "../api";
 import { PLAYERS } from "../api";
 import { useDraftStore } from "../store";

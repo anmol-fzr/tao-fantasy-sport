@@ -1,10 +1,4 @@
-import {
-	isMatch,
-	Link,
-	type LinkProps,
-	matchByPath,
-	useLocation,
-} from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import { Game, type Icon, People } from "iconsax-react";
 import { GithubIcon, Linkedin, Mail } from "lucide-react";
 
@@ -12,7 +6,7 @@ const socials = [
 	{
 		Icon: GithubIcon,
 		label: "Github",
-		link: "https://github.com/anmol-fzr",
+		link: "https://github.com/anmol-fzr/tao-fantasy-sport",
 	},
 	{
 		Icon: Linkedin,
@@ -59,7 +53,7 @@ export function Header() {
 										}}
 										className="flex flex-col items-center gap-1 border-b-2 border-transparent"
 									>
-										<Icon color="white" size={32} />
+										<Icon color="white" size={28} />
 										{label}
 									</Link>
 								</li>

@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { Calendar, Clock } from "iconsax-react";
+import { Add, Calendar, Clock } from "iconsax-react";
 import type { ComponentPropsWithoutRef } from "react";
 import { startTransition, ViewTransition } from "@/components/transition";
 import { Button } from "@/components/ui/button";
@@ -70,7 +70,10 @@ export const MatchListItem = (props: MatchListItemProps) => {
 					</p>
 				</div>
 
-				<Button onClick={handlePickPlayers}>Create Team</Button>
+				<Button onClick={handlePickPlayers}>
+					<Add color="black" />
+					Create Team
+				</Button>
 			</div>
 		</ViewTransition>
 	);

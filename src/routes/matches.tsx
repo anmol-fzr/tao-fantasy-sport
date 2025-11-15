@@ -1,11 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Page } from "@/components/page";
-import { MATCHES } from "@/modules/matches/api";
+import { Steps } from "@/components/Steps";
 import { MatchListItem } from "@/modules/matches/components/MatchList";
 import { SportsList } from "@/modules/matches/components/SportsList";
+import { getMatchesOpts, useGetMatches } from "@/modules/player/hooks/queries";
 
 export const Route = createFileRoute("/matches")({
 	component: RouteComponent,
+	loader: ({ context }) => {
+		context.queryClient.prefetchQuery(getMatchesOpts());
+	},
 	validateSearch: (search: Record<string, unknown>) => {
 		return {
 			sport: search.sport as string,
@@ -14,7 +18,7 @@ export const Route = createFileRoute("/matches")({
 });
 
 function RouteComponent() {
-	const { matches } = MATCHES.ALL();
+	const { matches } = useGetMatches();
 	const { sport } = Route.useSearch();
 
 	const match = matches[sport as keyof typeof matches];
@@ -22,6 +26,7 @@ function RouteComponent() {
 	return (
 		<Page>
 			<Page.Header>
+				<Steps currStep={0} />
 				<SportsList />
 			</Page.Header>
 

@@ -1,10 +1,10 @@
 import { Link, useSearch } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Page } from "@/components/page";
-import { MATCHES } from "../api";
+import { useGetMatches } from "@/modules/player/hooks/queries";
 
 export const SportsList = () => {
-	const { matches: data } = MATCHES.ALL();
+	const { matches: data } = useGetMatches();
 	const { sport } = useSearch({ from: "/matches" });
 
 	const matches = Object.keys(data).map((match) => ({
@@ -56,7 +56,7 @@ const SportLink = (props: SportLinkProps) => {
 			to="/matches"
 			viewTransition
 			search={{ sport }}
-			className={`border border-white p-2 px-4 rounded-full flex items-center justify-center capitalize ${isSelected ? "bg-white text-black" : ""}`}
+			className={`border p-2 px-4 rounded-full flex items-center justify-center capitalize ${isSelected ? "bg-white text-black" : ""}`}
 		>
 			{children}
 		</Link>

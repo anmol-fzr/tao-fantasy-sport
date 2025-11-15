@@ -35,10 +35,6 @@ export function getRoleCounts(players: Player[]) {
 	return counts;
 }
 
-export function getCredits(players: Player[]) {
-	return players.reduce((sum, p) => sum + p.event_player_credit, 0);
-}
-
 export function getTeamCounts(players: Player[]) {
 	const teams: Record<string, number> = {};
 	players.forEach((p) => {

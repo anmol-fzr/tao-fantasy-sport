@@ -12,7 +12,6 @@ export default defineConfig({
     devtools(),
     tanstackRouter({
       target: 'react',
-      autoCodeSplitting: true,
     }),
     viteReact(),
     tailwindcss(),

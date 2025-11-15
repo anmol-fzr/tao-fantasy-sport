@@ -2,12 +2,10 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Player, Players } from "@/modules/player/api";
 import type { MatchDetails } from "../matches/api";
-import { getTotalCredits } from "./helpers";
+import { getTotalCredits, MAX_CREDITS } from "./helpers";
 
 type PlayerId = Player["id"];
 type MatchId = MatchDetails["id"];
-
-const MAX_CREDITS = 100;
 
 interface DraftState {
 	matchId: MatchId;
@@ -77,8 +75,6 @@ export const useDraftStore = create<DraftState>()(
 			setViceCaptain: (id) => set({ viceCaptainId: id }),
 
 			reset: () => {
-				console.log("reset draft store");
-
 				set({
 					matchId: 0,
 					players: [],

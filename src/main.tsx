@@ -9,6 +9,7 @@ import { routeTree } from "./routeTree.gen";
 import "./styles.css";
 
 const TanStackQueryProviderContext = TanStackQueryProvider.getContext();
+
 const router = createRouter({
 	defaultViewTransition: true,
 	routeTree,

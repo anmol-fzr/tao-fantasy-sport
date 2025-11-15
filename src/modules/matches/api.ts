@@ -1,4 +1,4 @@
-import matches from "@/data/matches.json" with { type: "json" };
+import { axiosInst } from "@/lib/axios";
 
 export interface IResMatches {
 	matches: Matches;
@@ -38,11 +38,13 @@ export interface MatchDetails {
 }
 
 export const MATCHES = {
-	ALL: () => matches,
-	ONE: (id: MatchDetails["id"]) => {
-		const allMatches = MATCHES.ALL();
+	ALL: () => axiosInst.get<IResMatches>("/Get_All_upcoming_Matches.json"),
+	ONE: async (id: MatchDetails["id"]) => {
+		const allMatches = await MATCHES.ALL();
 
-		for (const [_sport, sportMatches] of Object.entries(allMatches.matches)) {
+		for (const [_sport, sportMatches] of Object.entries(
+			allMatches.data.matches,
+		)) {
 			for (const sportMatch of sportMatches) {
 				if (sportMatch.id === id) {
 					return sportMatch;

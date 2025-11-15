@@ -1,13 +1,13 @@
 import { ViewTransition } from "@/components/transition";
-import { MATCHES } from "@/modules/matches/api";
 import { MatchListItem } from "@/modules/matches/components/MatchList";
+import { useGetMatch } from "../hooks/queries";
 import { useDraftStore } from "../store";
 
 export const TeamVersusCard = () => {
 	const matchId = useDraftStore((state) => state.matchId);
-	const match = MATCHES.ONE(matchId);
+	const { match } = useGetMatch(matchId);
 
-	if (match === null) {
+	if (!match) {
 		return;
 	}
 

@@ -41,7 +41,7 @@ export const useTeamStore = create<TeamStoreState>()(
 					...team,
 				};
 
-				const updated = [...currTeams, newTeam];
+				const updated = [newTeam, ...currTeams];
 
 				set({
 					teams: updated,

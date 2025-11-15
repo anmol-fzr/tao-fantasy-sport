@@ -4,16 +4,14 @@ import {
 	type RowSelectionState,
 	useReactTable,
 } from "@tanstack/react-table";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DataTable } from "@/components/DataTable";
 import { IndeterminateCheckbox } from "@/components/ui/checkbox";
 import type { Player } from "../api";
-import { PLAYERS } from "../api";
+import { useGetPlayers } from "../hooks/queries";
 import { useDraftStore } from "../store";
 import { validateAddPlayer } from "../validator";
-
-const playersPromise = PLAYERS.ALL();
 
 const columns: ColumnDef<Player>[] = [
 	{
@@ -67,7 +65,7 @@ const columns: ColumnDef<Player>[] = [
 ];
 
 export function PlayersTable() {
-	const { data: players } = use(playersPromise);
+	const { players } = useGetPlayers();
 
 	const setDraftPlayers = useDraftStore((s) => s.setPlayers);
 	const draftedPlayers = useDraftStore((s) => s.players);

@@ -12,7 +12,7 @@ interface TeamListImplProps {
 	teams: TeamWithId[];
 }
 
-export const TeamListImpl = (props: TeamListImplProps) => {
+const TeamListImpl = (props: TeamListImplProps) => {
 	const { teams } = props;
 
 	if (teams.length === 0) {

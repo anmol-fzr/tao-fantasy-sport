@@ -1,4 +1,8 @@
-import { queryOptions, useQuery } from "@tanstack/react-query";
+import {
+	queryOptions,
+	useQuery,
+	useSuspenseQuery,
+} from "@tanstack/react-query";
 import { MATCHES, type MatchDetails } from "@/modules/matches/api";
 import { PLAYERS } from "../api";
 
@@ -17,7 +21,7 @@ const getMatchOpts = (matchId: MatchDetails["id"]) => {
 
 const useGetMatches = () => {
 	const opts = getMatchesOpts();
-	const { data, ...rest } = useQuery(opts);
+	const { data, ...rest } = useSuspenseQuery(opts);
 
 	const matches = data?.data?.matches || {};
 	return { matches, data, ...rest };

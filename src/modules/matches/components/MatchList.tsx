@@ -4,8 +4,38 @@ import type { ComponentPropsWithoutRef } from "react";
 import { startTransition, ViewTransition } from "@/components/transition";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useGetMatches } from "@/modules/player/hooks/queries";
 import { useDraftStore } from "@/modules/player/store";
+import { Route } from "@/routes/matches";
 import type { MatchDetails } from "../api";
+
+export const MatchList = () => {
+	const { matches } = useGetMatches();
+	const { sport } = Route.useSearch();
+
+	const match = matches[sport as keyof typeof matches];
+
+	return (
+		<div className="flex flex-col gap-4">
+			{sport?.length > 0
+				? match.map((match) => (
+						<div key={match.id} className="p-2 space-y-2">
+							<MatchListItem {...match} />
+						</div>
+					))
+				: Object.entries(matches).map(([title, matchs]) => (
+						<div key={title}>
+							<p className="capitalize text-2xl">{title}</p>
+							<ul className="p-2 space-y-2">
+								{matchs.map((match) => (
+									<MatchListItem key={match.id} {...match} />
+								))}
+							</ul>
+						</div>
+					))}
+		</div>
+	);
+};
 
 interface MatchListItemProps extends MatchDetails {}
 

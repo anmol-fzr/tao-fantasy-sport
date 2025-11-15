@@ -33,7 +33,19 @@ export function CaptainTable() {
 	return <DataTable table={table} />;
 }
 
-function getColumns({ captainId, viceCaptainId, setCaptain, setViceCaptain }) {
+type GetColumns = {
+	captainId: number | null;
+	viceCaptainId: number | null;
+	setCaptain: (v: number) => void;
+	setViceCaptain: (v: number) => void;
+};
+
+function getColumns({
+	captainId,
+	viceCaptainId,
+	setCaptain,
+	setViceCaptain,
+}: GetColumns) {
 	const columns: ColumnDef<Player>[] = [
 		{
 			accessorKey: "id",
@@ -81,7 +93,7 @@ function getColumns({ captainId, viceCaptainId, setCaptain, setViceCaptain }) {
 									}
 									setCaptain(id);
 								} else {
-									setCaptain(null);
+									setCaptain(0);
 								}
 							}}
 						/>
@@ -109,7 +121,7 @@ function getColumns({ captainId, viceCaptainId, setCaptain, setViceCaptain }) {
 									}
 									setViceCaptain(id);
 								} else {
-									setViceCaptain(null);
+									setViceCaptain(0);
 								}
 							}}
 						/>

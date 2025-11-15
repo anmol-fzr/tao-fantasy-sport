@@ -104,7 +104,10 @@ export function PlayersTable() {
 			const addedId = nextKeys.find((k) => !prevKeys.includes(k));
 			const playerToAdd = players.find((p) => p.id.toString() === addedId);
 
-			const { ok, error } = validateAddPlayer(draftedPlayers, playerToAdd);
+			const { ok, error } = validateAddPlayer(
+				draftedPlayers,
+				playerToAdd as Player,
+			);
 
 			if (!ok) {
 				toast.error(error);

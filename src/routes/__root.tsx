@@ -2,7 +2,7 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { Game } from "iconsax-react";
+//import { Game } from "iconsax-react";
 import { Toaster } from "@/components/ui/sonner";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 
@@ -10,13 +10,13 @@ interface MyRouterContext {
 	queryClient: QueryClient;
 }
 
-const links = [
-	{
-		label: "Upcoming Matches",
-		to: "",
-		Icon: Game,
-	},
-];
+// const links = [
+// 	{
+// 		label: "Upcoming Matches",
+// 		to: "",
+// 		Icon: Game,
+// 	},
+// ];
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	component: () => (

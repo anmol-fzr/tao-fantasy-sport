@@ -1,9 +1,7 @@
 import { GoBack } from "@/components/GoBack";
 import { CaptainTable } from "../components/CaptainTable";
-import { useDraftStore } from "../store";
 
 export function PickCaptainsScreen() {
-	const players = useDraftStore((state) => state.players);
 	return (
 		<>
 			<header>

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { Calendar, Clock } from "iconsax-react";
 import type { ComponentPropsWithoutRef } from "react";
 import { startTransition, ViewTransition } from "@/components/transition";
@@ -19,7 +19,6 @@ export const MatchListItem = (props: MatchListItemProps) => {
 		t2_short_name,
 		t1_name,
 		event_name,
-		match_name,
 		t2_image,
 		t2_name,
 		match_date,

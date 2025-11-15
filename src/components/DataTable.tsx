@@ -1,5 +1,4 @@
 import { flexRender, type Table as TTable } from "@tanstack/react-table";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
 	Table,
 	TableBody,

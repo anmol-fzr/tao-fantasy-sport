@@ -31,7 +31,7 @@ function IndeterminateCheckbox({
 	indeterminate,
 	className = "",
 	...rest
-}: { indeterminate?: boolean } & React.HTMLProps<HTMLInputElement>) {
+}: { indeterminate?: boolean } & React.ComponentPropsWithoutRef<"input">) {
 	const ref = React.useRef<HTMLInputElement>(null);
 
 	React.useEffect(() => {

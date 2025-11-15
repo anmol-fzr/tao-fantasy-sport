@@ -7,6 +7,7 @@ import * as TanStackQueryProvider from "./integrations/tanstack-query/root-provi
 import { routeTree } from "./routeTree.gen";
 
 import "./styles.css";
+import { NotFound } from "./components/NotFound.tsx";
 
 const TanStackQueryProviderContext = TanStackQueryProvider.getContext();
 
@@ -20,6 +21,7 @@ const router = createRouter({
 	scrollRestoration: true,
 	defaultStructuralSharing: true,
 	defaultPreloadStaleTime: 0,
+	defaultNotFoundComponent: NotFound,
 });
 
 declare module "@tanstack/react-router" {

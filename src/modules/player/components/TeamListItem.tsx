@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Eye } from "iconsax-react";
 import { Button } from "@/components/ui/button";
 import type { TeamWithId } from "@/store/team.store";
@@ -7,7 +8,7 @@ import { fullToShortPlayerRole, getRoleCounts } from "../helpers";
 type TeamListItemProps = TeamWithId;
 
 export const TeamListItem = (props: TeamListItemProps) => {
-	const { players, captainId, viceCaptainId } = props;
+	const { id, players, captainId, viceCaptainId } = props;
 
 	const obj = getRoleCounts(players);
 
@@ -55,9 +56,11 @@ export const TeamListItem = (props: TeamListItemProps) => {
 						</div>
 					))}
 				</div>
-				<Button>
-					<Eye color="black" />
-					Team Preview
+				<Button asChild>
+					<Link to="/team/$id" params={{ id: id.toString() }}>
+						<Eye color="black" />
+						Team Preview
+					</Link>
 				</Button>
 			</div>
 		</div>
@@ -73,7 +76,7 @@ interface TeamPlayerImpl {
 	rank: string;
 }
 
-const TeamPlayerImpl = (props: TeamPlayerImpl) => {
+export const TeamPlayerImpl = (props: TeamPlayerImpl) => {
 	const { team, name, rank } = props;
 	return (
 		<div className="flex gap-4 items-end p-2">

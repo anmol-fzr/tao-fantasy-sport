@@ -13,9 +13,9 @@ import { Route as TeamsRouteImport } from './routes/teams'
 import { Route as PickRouteImport } from './routes/pick'
 import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TeamIdRouteImport } from './routes/team.$id'
 import { Route as PickPlayersRouteImport } from './routes/pick/players'
 import { Route as PickCaptainsRouteImport } from './routes/pick/captains'
-import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 
 const TeamsRoute = TeamsRouteImport.update({
   id: '/teams',
@@ -37,6 +37,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamIdRoute = TeamIdRouteImport.update({
+  id: '/team/$id',
+  path: '/team/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PickPlayersRoute = PickPlayersRouteImport.update({
   id: '/players',
   path: '/players',
@@ -47,29 +52,24 @@ const PickCaptainsRoute = PickCaptainsRouteImport.update({
   path: '/captains',
   getParentRoute: () => PickRoute,
 } as any)
-const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
-  id: '/demo/tanstack-query',
-  path: '/demo/tanstack-query',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/matches': typeof MatchesRoute
   '/pick': typeof PickRouteWithChildren
   '/teams': typeof TeamsRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/pick/captains': typeof PickCaptainsRoute
   '/pick/players': typeof PickPlayersRoute
+  '/team/$id': typeof TeamIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/matches': typeof MatchesRoute
   '/pick': typeof PickRouteWithChildren
   '/teams': typeof TeamsRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/pick/captains': typeof PickCaptainsRoute
   '/pick/players': typeof PickPlayersRoute
+  '/team/$id': typeof TeamIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,9 +77,9 @@ export interface FileRoutesById {
   '/matches': typeof MatchesRoute
   '/pick': typeof PickRouteWithChildren
   '/teams': typeof TeamsRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/pick/captains': typeof PickCaptainsRoute
   '/pick/players': typeof PickPlayersRoute
+  '/team/$id': typeof TeamIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -88,27 +88,27 @@ export interface FileRouteTypes {
     | '/matches'
     | '/pick'
     | '/teams'
-    | '/demo/tanstack-query'
     | '/pick/captains'
     | '/pick/players'
+    | '/team/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/matches'
     | '/pick'
     | '/teams'
-    | '/demo/tanstack-query'
     | '/pick/captains'
     | '/pick/players'
+    | '/team/$id'
   id:
     | '__root__'
     | '/'
     | '/matches'
     | '/pick'
     | '/teams'
-    | '/demo/tanstack-query'
     | '/pick/captains'
     | '/pick/players'
+    | '/team/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,7 +116,7 @@ export interface RootRouteChildren {
   MatchesRoute: typeof MatchesRoute
   PickRoute: typeof PickRouteWithChildren
   TeamsRoute: typeof TeamsRoute
-  DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  TeamIdRoute: typeof TeamIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -149,6 +149,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/team/$id': {
+      id: '/team/$id'
+      path: '/team/$id'
+      fullPath: '/team/$id'
+      preLoaderRoute: typeof TeamIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pick/players': {
       id: '/pick/players'
       path: '/players'
@@ -162,13 +169,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/pick/captains'
       preLoaderRoute: typeof PickCaptainsRouteImport
       parentRoute: typeof PickRoute
-    }
-    '/demo/tanstack-query': {
-      id: '/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof DemoTanstackQueryRouteImport
-      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -190,7 +190,7 @@ const rootRouteChildren: RootRouteChildren = {
   MatchesRoute: MatchesRoute,
   PickRoute: PickRouteWithChildren,
   TeamsRoute: TeamsRoute,
-  DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  TeamIdRoute: TeamIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

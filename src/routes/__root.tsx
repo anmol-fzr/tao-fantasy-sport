@@ -16,7 +16,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 		<>
 			<Toaster />
 			<Header />
-			<div className="bg-background min-h-screen max-w-6xl mx-auto p-2">
+			<div className="bg-background max-w-6xl min-h-screen mx-auto p-2">
 				<Outlet />
 			</div>
 			<BottomNavBar />

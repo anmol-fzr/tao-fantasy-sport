@@ -1,6 +1,6 @@
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "lucide-react";
-import type * as React from "react";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -27,4 +27,27 @@ function Checkbox({
 	);
 }
 
-export { Checkbox };
+function IndeterminateCheckbox({
+	indeterminate,
+	className = "",
+	...rest
+}: { indeterminate?: boolean } & React.HTMLProps<HTMLInputElement>) {
+	const ref = React.useRef<HTMLInputElement>(null);
+
+	React.useEffect(() => {
+		if (typeof indeterminate === "boolean" && ref.current) {
+			ref.current.indeterminate = !rest.checked && indeterminate;
+		}
+	}, [indeterminate, rest.checked]);
+
+	return (
+		<input
+			type="checkbox"
+			ref={ref}
+			className={cn("cursor-pointer", className)}
+			{...rest}
+		/>
+	);
+}
+
+export { Checkbox, IndeterminateCheckbox };

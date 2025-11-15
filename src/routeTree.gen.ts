@@ -9,14 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PickPlayersRouteImport } from './routes/pick-players'
+import { Route as PickRouteImport } from './routes/pick'
 import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PickPlayersRouteImport } from './routes/pick/players'
+import { Route as PickCaptainsRouteImport } from './routes/pick/captains'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 
-const PickPlayersRoute = PickPlayersRouteImport.update({
-  id: '/pick-players',
-  path: '/pick-players',
+const PickRoute = PickRouteImport.update({
+  id: '/pick',
+  path: '/pick',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MatchesRoute = MatchesRouteImport.update({
@@ -29,6 +31,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PickPlayersRoute = PickPlayersRouteImport.update({
+  id: '/players',
+  path: '/players',
+  getParentRoute: () => PickRoute,
+} as any)
+const PickCaptainsRoute = PickCaptainsRouteImport.update({
+  id: '/captains',
+  path: '/captains',
+  getParentRoute: () => PickRoute,
+} as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   id: '/demo/tanstack-query',
   path: '/demo/tanstack-query',
@@ -38,44 +50,69 @@ const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/matches': typeof MatchesRoute
-  '/pick-players': typeof PickPlayersRoute
+  '/pick': typeof PickRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/pick/captains': typeof PickCaptainsRoute
+  '/pick/players': typeof PickPlayersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/matches': typeof MatchesRoute
-  '/pick-players': typeof PickPlayersRoute
+  '/pick': typeof PickRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/pick/captains': typeof PickCaptainsRoute
+  '/pick/players': typeof PickPlayersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/matches': typeof MatchesRoute
-  '/pick-players': typeof PickPlayersRoute
+  '/pick': typeof PickRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/pick/captains': typeof PickCaptainsRoute
+  '/pick/players': typeof PickPlayersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/matches' | '/pick-players' | '/demo/tanstack-query'
+  fullPaths:
+    | '/'
+    | '/matches'
+    | '/pick'
+    | '/demo/tanstack-query'
+    | '/pick/captains'
+    | '/pick/players'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/matches' | '/pick-players' | '/demo/tanstack-query'
-  id: '__root__' | '/' | '/matches' | '/pick-players' | '/demo/tanstack-query'
+  to:
+    | '/'
+    | '/matches'
+    | '/pick'
+    | '/demo/tanstack-query'
+    | '/pick/captains'
+    | '/pick/players'
+  id:
+    | '__root__'
+    | '/'
+    | '/matches'
+    | '/pick'
+    | '/demo/tanstack-query'
+    | '/pick/captains'
+    | '/pick/players'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MatchesRoute: typeof MatchesRoute
-  PickPlayersRoute: typeof PickPlayersRoute
+  PickRoute: typeof PickRouteWithChildren
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/pick-players': {
-      id: '/pick-players'
-      path: '/pick-players'
-      fullPath: '/pick-players'
-      preLoaderRoute: typeof PickPlayersRouteImport
+    '/pick': {
+      id: '/pick'
+      path: '/pick'
+      fullPath: '/pick'
+      preLoaderRoute: typeof PickRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/matches': {
@@ -92,6 +129,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pick/players': {
+      id: '/pick/players'
+      path: '/players'
+      fullPath: '/pick/players'
+      preLoaderRoute: typeof PickPlayersRouteImport
+      parentRoute: typeof PickRoute
+    }
+    '/pick/captains': {
+      id: '/pick/captains'
+      path: '/captains'
+      fullPath: '/pick/captains'
+      preLoaderRoute: typeof PickCaptainsRouteImport
+      parentRoute: typeof PickRoute
+    }
     '/demo/tanstack-query': {
       id: '/demo/tanstack-query'
       path: '/demo/tanstack-query'
@@ -102,10 +153,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface PickRouteChildren {
+  PickCaptainsRoute: typeof PickCaptainsRoute
+  PickPlayersRoute: typeof PickPlayersRoute
+}
+
+const PickRouteChildren: PickRouteChildren = {
+  PickCaptainsRoute: PickCaptainsRoute,
+  PickPlayersRoute: PickPlayersRoute,
+}
+
+const PickRouteWithChildren = PickRoute._addFileChildren(PickRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MatchesRoute: MatchesRoute,
-  PickPlayersRoute: PickPlayersRoute,
+  PickRoute: PickRouteWithChildren,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
 }
 export const routeTree = rootRouteImport

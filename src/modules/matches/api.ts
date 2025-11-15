@@ -1,3 +1,5 @@
+import matches from "@/data/matches.json" with { type: "json" };
+
 export interface IResMatches {
 	matches: Matches;
 }
@@ -36,42 +38,15 @@ export interface MatchDetails {
 }
 
 export const MATCHES = {
-	ALL: () => {
-		return {
-			matches: {
-				cricket: [
-					{
-						id: 6432,
-						short_name: "",
-						is_ipl: 0,
-						match_name: "MS vs PS",
-						event_id: 390,
-						team_a_id: 477,
-						team_b_id: 467,
-						event_name: "Big T20 Bash",
-						sport_id: 1,
-						sport_type: "cricket",
-						announcement: null,
-						toss_details: null,
-						match_status: "upcoming",
-						match_result: "Not Started",
-						match_type: "T20",
-						match_date: "2022-02-23T08:15+00:00",
-						playing_xi_added: 0,
-						match_completed_at: null,
-						t1_name: "Melbourne Stars",
-						t2_name: "Perth Scorchers",
-						t1_short_name: "MS",
-						t2_short_name: "PS",
-						t1_image:
-							"https://s3.ap-south-1.amazonaws.com/leaguex/team-images/bblw/MLSW.png",
-						t2_image:
-							"https://s3.ap-south-1.amazonaws.com/leaguex/team-images/bblw/PERW.png",
-						leagues_joined: 0,
-						in_review: 0,
-					},
-				],
-			},
-		} as const;
+	ALL: () => matches,
+	ONE: (id: MatchDetails["id"]) => {
+		for (const [_sport, sportMatches] of Object.entries(matches.matches)) {
+			for (const sportMatch of sportMatches) {
+				if (sportMatch.id === id) {
+					return sportMatch;
+				}
+			}
+		}
+		return null;
 	},
 } as const;

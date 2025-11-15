@@ -1,14 +1,17 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Calendar, Clock } from "iconsax-react";
 import type { ComponentPropsWithoutRef } from "react";
-import { ViewTransition } from "@/components/transition";
+import { startTransition, ViewTransition } from "@/components/transition";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useDraftStore } from "@/modules/player/store";
 import type { MatchDetails } from "../api";
 
 interface MatchListItemProps extends MatchDetails {}
 
 export const MatchListItem = (props: MatchListItemProps) => {
+	const setMatchId = useDraftStore((state) => state.setMatchId);
+
 	const {
 		id,
 		t1_image,
@@ -21,6 +24,15 @@ export const MatchListItem = (props: MatchListItemProps) => {
 		t2_name,
 		match_date,
 	} = props;
+
+	const navigate = useNavigate();
+
+	function handlePickPlayers() {
+		startTransition(() => {
+			setMatchId(id);
+			navigate({ to: "/pick/players" });
+		});
+	}
 
 	return (
 		<ViewTransition name={`match-${id}`}>
@@ -59,11 +71,7 @@ export const MatchListItem = (props: MatchListItemProps) => {
 					</p>
 				</div>
 
-				<Button asChild>
-					<Link to="/pick-players" viewTransition>
-						Create Team
-					</Link>
-				</Button>
+				<Button onClick={handlePickPlayers}>Create Team</Button>
 			</div>
 		</ViewTransition>
 	);

@@ -1,4 +1,5 @@
 import { flexRender, type Table as TTable } from "@tanstack/react-table";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
 	Table,
 	TableBody,
@@ -17,7 +18,9 @@ interface DataTableProps<TData> {
 export function DataTable<TData>({ table, className }: DataTableProps<TData>) {
 	return (
 		<div className={cn("overflow-hidden rounded-md border", className)}>
-			<Table>
+			<Table
+			//containerClassname="h-fit max-h-80 overflow-y-auto relative"
+			>
 				<TableHeader>
 					{table.getHeaderGroups().map((hg) => (
 						<TableRow key={hg.id}>
@@ -30,7 +33,7 @@ export function DataTable<TData>({ table, className }: DataTableProps<TData>) {
 					))}
 				</TableHeader>
 
-				<TableBody>
+				<TableBody className="h-[500px] overflow-y-auto">
 					{table.getRowModel().rows.map((row) => (
 						<TableRow
 							key={row.id}

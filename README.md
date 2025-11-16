@@ -4,6 +4,13 @@ This document explains what the project does, how it works internally, and the r
 
 ---
 
+# Demo
+
+
+https://github.com/user-attachments/assets/6dcef3ad-379f-49a2-9869-cb7b33fd2cd6
+
+
+
 ## 1. Introduction
 
 **Tao Fantasy Sport** is a modern frontend assignment that demonstrates clean UI architecture, state management, and TypeScript-driven development.  
